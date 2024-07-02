@@ -34,12 +34,12 @@ This project is a simple console-based quiz generator written in Java. It reads 
 - **File Reading**: If the file cannot be read, the program will print an error message and exit.
 - **Invalid Inputs**: If the user inputs an invalid answer (not a valid number or out of range), the program will print an error message and exit.
 
-## Future Enhancements
+## Future Enhancements :
 
 - **Graphical User Interface (GUI)**: Adding a GUI to make the quiz more interactive and visually appealing.
 - **Score Tracking**: Keeping track of the user's score and providing feedback at the end of the quiz.
 - **Multiple Quiz Files**: Allowing the user to choose from multiple quiz files.
 
-## Contributions
+## Contributions :
 
 Contributions are welcome! Feel free to fork the repository and submit a pull request with your changes. Anyone can Run/Folk a public repository, and then submit a pull request that proposes changes to the repository's GitHub Actions workflows. Replit Link : https://replit.com/@ankitkumaar0515/Quiz-Calculator
