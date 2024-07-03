@@ -1,83 +1,90 @@
-import java.nio.file.*;
 import java.util.*;
-
 public class Main {
-    // ArrayList to store the questions read from the file
-    private static ArrayList<Question> questions = new ArrayList<Question>();
-
-    // Method to read questions from the data.txt file
-    private static void read() {
-        try {
-            // Define the path to the file
-            Path path = Paths.get("data.txt");
-            System.out.println("Attempting to read file from path: " + path.toAbsolutePath());
-
-            // Read all lines from the file
-            List<String> lines = Files.readAllLines(path);
-            System.out.println("File read successfully. Number of lines: " + lines.size());
-            System.out.println();
-
-            // Iterate over the lines in chunks of 6 (assuming each question has 1 text + 5 optio
-            for (int i=0; i<lines.size(); i+=6) {
-                String text = lines.get(i);
-                String[] options = {lines.get(i+1), lines.get(i+2), lines.get(i+3), lines.get(i+4), lines.get(i+5)};
-                String answer = lines.get(i+1);
-
-                /*
-                * System.out.println("Adding Question : " + text);
-                * System.out.println("Adding Options: " + String.join(", ", options));
-                * System.out.println("Correct Answer: " + answer);
-                */ 
-
-                // Create a new Question object and add it to the questions list
-                Question q = new Question(text, options, answer);
-                questions.add(q);
-            }    
-        } 
-        catch (Exception e) {
-            System.out.println("Couldn't read file data.txt System Exit");
-        }
-    }
-
-    // Method to validate user answers against the questions
-    public static void validation()
-    {
+    public static void main(String[] args) {
+        // Scanner for user input
+        // Variable to hold the current quiz
         Scanner in = new Scanner(System.in);
+        Quiz quiz = null;
 
-        // Loop until there are no more questions
-        while (questions.size() > 0) {
-            // Remove the first question from the list
-            Question q = questions.remove(0);
-            System.out.println(q.question);
-            
-            // Print the options
-            for (int i=0; i<q.options.length; i++) {
-                System.out.println(i + ". " + q.options[i]);
-            }
-            
-            // Get user input for the question
-            // Validate user input
-            int input = in.nextInt();
-            if (input < 0 || input > q.options.length-1) {
-                System.out.println("Invalid Input");
-            }
-            
-            // Check if the user's answer is correct
-            if (q.answer.equals(q.options[input])) {
-                System.out.println("Right Answer");
-                System.out.println();
-            }
-            else {
-                System.out.println("Wrong Answer");
-                System.out.println();
+        // Main loop to keep the application running
+        while (true) {
+            System.out.println();
+            System.out.println("Quiz Application");
+            System.out.println("1. Create a new quiz");
+            System.out.println("2. Add a question to the quiz");
+            System.out.println("3. Take the quiz");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+
+            // Read the user's choice
+            // Consume newline
+            int choice = in.nextInt();
+            in.nextLine();
+
+            // Switch case to handle user's choice
+            switch (choice) {
+                case 1:
+                    // Create a new quiz
+                    // Read quiz title from user
+                    System.out.println();
+                    System.out.print("Enter quiz title: ");
+                    String quiz_name = in.nextLine();
+
+                    // Create a new Quiz object
+                    // Read quiz title from user
+                    quiz = new Quiz(quiz_name);
+                    System.out.println("Quiz created with title: " + quiz_name);
+                    break;
+                case 2:
+                    // Add a question to the quiz
+                    // Prompt to create a quiz if not already created
+                    if (quiz == null) {
+                        System.out.println("Please create a quiz first.");
+                        break;
+                    }
+
+                    // Read question text from user
+                    System.out.println();
+                    System.out.print("Enter question text: ");
+                    String question = in.nextLine();
+                    String[] options = new String[5];
+
+                    // Loop to read the options
+                    for (int i = 0; i < 5; i++) {
+                        System.out.print("Enter option " + (i+1) + ": ");
+                        options[i] = in.nextLine();
+                    }
+
+                    // Read correct answer from user
+                    System.out.print("Enter the correct answer: ");
+                    String correct_answer = in.nextLine();
+
+                    // Add the question to the quiz
+                    // Confirm question addition
+                    quiz.addQuestion(new Question(question, options, correct_answer));
+                    System.out.println("Question added to the quiz.");
+                    break;
+                case 3:
+                    // Take the quiz
+                    // Prompt to create a quiz if not already created
+                    if (quiz == null) {
+                        System.out.println("Please create a quiz first.");
+                        break;
+                    }
+
+                    // Start the quiz
+                    System.out.println();
+                    quiz.takeQuiz();
+                    break;
+                case 4:
+                    // Exit the application
+                    // Confirm exit
+                    System.out.println("Exiting... Exit");
+                    return;
+                default:
+                    // Handle invalid choices
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
-
-    // Main method to execute the program
-    public static void main(String[] args) 
-    {
-        read(); // Read questions from the file
-        validation(); // Validate user answers
-    }    
 }
