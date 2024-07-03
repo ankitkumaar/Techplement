@@ -2,43 +2,77 @@
 
 # Week-1 : Quiz Generator
 
-This project is a simple console-based quiz generator written in Java. It reads questions and answers from a text file (`data.txt`) and presents them to the user in a random order. Users can input their answers, and the program will indicate whether the answer is correct or not.
+This project is a simple console-based quiz generator written in Java. It allows users to create quizzes, add questions with multiple-choice options, specify correct answers, and take quizzes to test their knowledge. The application provides immediate feedback on the user's answers and keeps track of their score.
 
 ## Features :
 
-- **Read Questions from File**: Reads questions and answers from a text file, making it easy to update and manage quiz content.
-- **Randomized Answers**: Randomizes the order of answers for each question to ensure a varied experience each time the quiz is taken.
-- **User Interaction**: Allows users to input their answers and provides immediate feedback on whether the answer is correct.
-- **Error Handling**: Handles errors gracefully, including file reading errors and invalid user inputs.
+- **Create Quizzes**: Users can create new quizzes with custom titles.
+- **Add Questions**: Users can add multiple-choice questions to the quiz.
+- **Randomized Answers**: The order of answers is randomized each time the quiz is taken to ensure a varied experience.
+- **Take Quizzes**: Users can take the quiz, input their answers, and receive immediate feedback.
+- **Score Tracking**: The application tracks the user's score and provides feedback at the end of the quiz.
+- **Error Handling**: Handles errors gracefully, including invalid user inputs.
 
 ## Project Structure :
 
-- **Main.java**: The main entry point of the application. Contains the logic to read the file, present questions, and handle user inputs.
-- **Question.java**: Represents a quiz question. Contains the question text, possible answers, and the correct answer.
-
+- `Main.java`: The main entry point of the application. Contains the logic to create quizzes, add questions, take quizzes, and handle user inputs.
+- `Quiz.java`: Represents a quiz. Contains the quiz title and a list of questions. Provides methods to add questions and take the quiz.
+- `Question.java`: Represents a quiz question. Contains the question text, possible answers, and the correct answer.
 
 ## Code Explanation :
 ### `Main.java` :
 
-- **read()**: Reads the `data.txt` file and initializes the list of questions.
-- **validation()**: Handles the main loop of the program, presenting questions to the user and checking their answers.
-- **main()**: Entry point of the application, calls `read()` and then `validation()`.
+- **`main(String[] args)`**: The entry point of the application. Presents a menu to the user to create quizzes, add questions, take quizzes, or exit.
+  - **Create a new quiz**: Prompts the user to enter a quiz title and creates a new `Quiz` object.
+  - **Add a question**: Prompts the user to enter question text, options, and the correct answer, then adds the question to the quiz.
+  - **Take the quiz**: Starts the quiz, presenting each question and collecting user answers.
+  - **Exit**: Exits the application.
+
+### `Quiz.java` :
+
+- **Fields**:
+  - `quiz_name`: The title of the quiz.
+  - `questions`: A list of `Question` objects.
+- **Constructor**: Initializes the quiz with a title.
+- **Methods**:
+  - `addQuestion(Question question)`: Adds a question to the quiz.
+  - `takeQuiz()`: Interacts with the user to display questions, capture responses, provide feedback, and calculate the score.
 
 ### `Question.java` :
 
+- **Fields**:
+  - `question`: The text of the question.
+  - `options`: An array of possible answers.
+  - `answer`: The correct answer.
 - **Constructor**: Initializes a `Question` object with the provided text, options, and answer. Randomizes the order of options.
-- **Fields**: Stores the question text, options, and answer.
+- **Methods**:
+  - `getQuestion()`: Returns the question text.
+  - `getOptions()`: Returns the options.
+  - `getAnswer()`: Returns the correct answer.
+  - `checkCorrect(String selected_option)`: Checks if the selected option is correct.
 
 ## Error Handling :
 
-- **File Reading**: If the file cannot be read, the program will print an error message and exit.
-- **Invalid Inputs**: If the user inputs an invalid answer (not a valid number or out of range), the program will print an error message and exit.
+- **File Reading**: If the quiz data file cannot be read, the program will print an error message and exit.
+- **Invalid Inputs**: If the user inputs an invalid answer (not a valid number or out of range), the program will print an error message and prompt the user to try again.
 
 ## Future Enhancements :
 
 - **Graphical User Interface (GUI)**: Adding a GUI to make the quiz more interactive and visually appealing.
-- **Score Tracking**: Keeping track of the user's score and providing feedback at the end of the quiz.
-- **Multiple Quiz Files**: Allowing the user to choose from multiple quiz files.
+- **Score Tracking**: Keeping track of the user's score and providing detailed feedback at the end of the quiz.
+- **Multiple Quiz Files**: Allowing the user to choose from multiple quiz files to load different sets of questions.
+
+### Prerequisites :
+
+- Java Development Kit (JDK) installed
+- A text editor or IDE for Java development
+
+### Running the Application :
+
+1. Clone the repository: git clone https://github.com/your-username/quiz-generator.git
+2. Navigate to the project directory: cd quiz-generator-code
+3. Compile the Java files: javac *.java
+4. Run the application: java Main
 
 ## Contributions :
 
