@@ -69,7 +69,7 @@ This project is a simple console-based quiz generator written in Java. It allows
 
 ### Running the Application :
 
-1. Clone the repository: git clone https://github.com/your-username/quiz-generator.git
+1. Clone the repository: git clone https://github.com/ankitkumaar/Techplement/tree/main/Week1-Tasks/Quiz-Generator-code.git
 2. Navigate to the project directory: cd quiz-generator-code
 3. Compile the Java files: javac *.java
 4. Run the application: java Main
